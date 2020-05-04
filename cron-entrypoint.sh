@@ -5,6 +5,8 @@ set -e
 trap exit SIGINT
 trap exit SIGTERM
 
+git config credential.helper '!f() { sleep 1; echo "username=${GIT_USER}"; echo "password=${GIT_PASSWORD}"; }; f'
+
 if [ -n "$TIME_ZONE" ]; then
   cp /usr/share/zoneinfo/"$TIME_ZONE" /etc/localtime
   echo "$TIME_ZONE" > /etc/timezone
